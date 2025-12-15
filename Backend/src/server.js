@@ -7,6 +7,9 @@ import { connectionDB } from "../lib/DB.js";
 
 const __dirname = path.resolve();
 
+
+
+
 // console.log(ENV.PORT)
 app.get("/health", (req, res) => {
   res.status(200).json({
