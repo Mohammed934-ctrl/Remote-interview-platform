@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <h1>welcome to my app  login here</h1>
+      <h1>welcome to my app Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
     <SignedOut>
       <SignInButton />
     </SignedOut>
