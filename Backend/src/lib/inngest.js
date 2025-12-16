@@ -13,7 +13,13 @@ const syncuser = inngest.createFunction(
   async ({ event }) => {
     await connectionDB();
 
-    const { id, email_addresses, firstname, lastname, imageurl } = event.data;
+    const {
+  id,
+  email_addresses,
+  first_name,
+  last_name,
+  image_url,
+} = event.data;
 
 
     console.log("full event data =>", event.data)
@@ -21,8 +27,8 @@ const syncuser = inngest.createFunction(
     const newUser = {
       ClerkId: id,
       email: email_addresses[0]?.email_address,
-      name: `${firstname || ""} ${lastname || ""}  `,
-      profileImage: imageurl,
+      name: `${first_name || ""} ${last_name || ""}  `,
+      profileImage: image_url,
     };
     await  User.create(newUser)
   }
