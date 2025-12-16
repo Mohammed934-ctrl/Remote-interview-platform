@@ -1,16 +1,24 @@
 import express from "express";
 import path from "path"
+import { serve } from "inngest/express";
+import cors from "cors"
 const app = express();
+
 
 import { ENV } from "../lib/env.js";
 import { connectionDB } from "../lib/DB.js";
+import { inngest,Functions } from "./lib/inngest.js";
 
 const __dirname = path.resolve();
 
 
 
 
-// console.log(ENV.PORT)
+app.use(express.json());
+app.use(cors({credentials:true}))
+
+
+
 app.get("/health", (req, res) => {
   res.status(200).json({
     msg: "hello from server file",
@@ -21,6 +29,10 @@ app.get("/game", (req, res) => {
     msg: "game is ready",
   });
 });
+
+
+
+app.use("/api/inngest",serve({client:inngest,Functions}))
 
 if ((ENV.NODE_ENV = "production")) {
   app.use(express.static(path.join(__dirname, "../Frontend/dist")));
