@@ -7,7 +7,7 @@ const app = express();
 
 import { ENV } from "../lib/env.js";
 import { connectionDB } from "../lib/DB.js";
-import { inngest,Functions } from "./lib/inngest.js";
+import { inngest,functions } from "./lib/inngest.js";
 
 const __dirname = path.resolve();
 
@@ -32,7 +32,7 @@ app.get("/game", (req, res) => {
 
 
 
-app.use("/api/inngest",serve({client:inngest,Functions}))
+app.use("/api/inngest",serve({client:inngest,functions}))
 
 if ((ENV.NODE_ENV = "production")) {
   app.use(express.static(path.join(__dirname, "../Frontend/dist")));

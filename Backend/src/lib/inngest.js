@@ -15,6 +15,9 @@ const syncuser = inngest.createFunction(
 
     const { id, email_addresses, firstname, lastname, imageurl } = event.data;
 
+
+    console.log("full event data =>", event.data)
+
     const newUser = {
       ClerkId: id,
       email: email_addresses[0]?.email_address,
@@ -42,4 +45,4 @@ const deleteuser = inngest.createFunction({id:"delete-user"},{event:"clerk/user.
 
 
 
-export const Functions=[syncuser,deleteuser]
+export const functions=[syncuser,deleteuser]
