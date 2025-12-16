@@ -19,6 +19,7 @@
     "inngest": "^3.47.0",
     "mongoose": "^9.0.0",
     "nodemon": "^3.1.11",
-    "remote-interview": "file:.."
+    "remote-interview": "file:..",
+    "stream-chat": "^9.27.2"
   }
 }
