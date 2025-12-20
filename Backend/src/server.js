@@ -1,23 +1,22 @@
 import express from "express";
-import path from "path"
+import path from "path";
 import { serve } from "inngest/express";
-import cors from "cors"
+import cors from "cors";
+import { clerkMiddleware } from "@clerk/express";
+import chatroute from "./Routes/ChatRoute.js";
+import Sessionroute from "./Routes/SessionRoute.js";
 const app = express();
 
-
-import { ENV } from "../lib/env.js";
-import { connectionDB } from "../lib/DB.js";
-import { inngest,functions } from "./lib/inngest.js";
+import { ENV } from "./lib/env.js";
+import { connectionDB } from "./lib/DB.js";
+import { inngest, functions } from "./lib/inngest.js";
+import { ProtectRoute } from "./Middleware/ProtectRoute.js";
 
 const __dirname = path.resolve();
 
-
-
-
 app.use(express.json());
-app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
-
-
+app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+app.use(clerkMiddleware());
 
 app.get("/health", (req, res) => {
   res.status(200).json({
@@ -30,9 +29,10 @@ app.get("/game", (req, res) => {
   });
 });
 
+app.use("/api/inngest", serve({ client: inngest, functions }));
 
-
-app.use("/api/inngest",serve({client:inngest,functions}))
+app.use("/api/chat", chatroute);
+app.use("/api/session", Sessionroute);
 
 if ((ENV.NODE_ENV = "production")) {
   app.use(express.static(path.join(__dirname, "../Frontend/dist")));

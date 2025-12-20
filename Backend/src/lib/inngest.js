@@ -17,7 +17,7 @@ const syncuser = inngest.createFunction(
     const { id, email_addresses, first_name, last_name, image_url } =
       event.data;
 
-    console.log("full event data =>", event.data);
+    // console.log("full event data =>", event.data);
 
     const newUser = {
       ClerkId: id,
