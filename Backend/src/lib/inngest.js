@@ -12,26 +12,29 @@ const syncuser = inngest.createFunction(
   { event: "clerk/user.created" },
 
   async ({ event }) => {
-    await connectionDB();
+    try {
+      await connectionDB();
 
-    const { id, email_addresses, first_name, last_name, image_url } =
-      event.data;
+      const { id, email_addresses, first_name, last_name, image_url } =
+        event.data;
 
-    // console.log("full event data =>", event.data);
+      const newUser = {
+        clerkId: id,
+        email: email_addresses[0]?.email_address,
+        name: `${first_name || ""} ${last_name || ""}  `,
+        profileImage: image_url,
+      };
+      await User.create(newUser);
 
-    const newUser = {
-      ClerkId: id,
-      email: email_addresses[0]?.email_address,
-      name: `${first_name || ""} ${last_name || ""}  `,
-      profileImage: image_url,
-    };
-    await User.create(newUser);
-
-    await Createandupdatestreamuser({
-      id: newUser.ClerkId.toString(),
-      name: newUser.name,
-      image: newUser.profileImage,
-    });
+      await upsertStreamUser({
+        id: newUser.clerkId.toString(),
+        name: newUser.name,
+        image: newUser.profileImage,
+      });
+    } catch (error) {
+      console.error("SYNC USER FAILED:", error);
+      throw error;
+    }
   }
 );
 
@@ -41,8 +44,8 @@ const deleteuser = inngest.createFunction(
   async ({ event }) => {
     await connectionDB();
     const { id } = event.data;
-    await User.deleteOne({ ClerkId: id });
-    await deletestreamuser(id.toString())
+    await User.deleteOne({ clerkId: id });
+    await deletestreamuser(id.toString());
   }
 );
 

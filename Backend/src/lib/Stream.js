@@ -11,7 +11,7 @@ if (!Streamapikey || !Streamsecretkey) {
 
 //this is for chat usage
 export const ChatClient = StreamChat.getInstance(Streamapikey, Streamsecretkey);
-export const StreamClient= new StreamClient(Streamapikey,Streamsecretkey)
+export const newStreamClient= new StreamClient(Streamapikey,Streamsecretkey)
 
 export const Createandupdatestreamuser = async (Userdata) => {
   try {

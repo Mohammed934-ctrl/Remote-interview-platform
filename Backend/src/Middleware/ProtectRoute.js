@@ -6,14 +6,15 @@ export const ProtectRoute = [
 
   async (req, res, next) => {
     try {
-      const ClerkId = req.auth.userId;
-      if (!ClerkId)
+      
+     const clerkId = req.auth().userId;
+      if (!clerkId)
         return res.status(500).json({ message: "Unauthorized user" });
 
-      const user = await User.findOne({ ClerkId });
+      const user = await User.findOne({ clerkId});
       if (!user) return res.status(404).json({ message: "user not found" });
 
-      req.user = user;
+      req.user =user
       next();
     } catch (error) {
       console.error("error in protect route middleware", error);
