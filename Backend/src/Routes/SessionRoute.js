@@ -8,8 +8,8 @@ const router = Router()
 router.post("/",ProtectRoute,Createsession)
 router.get("/active",ProtectRoute,getactivesession)
 router.get("/my-recent-session",ProtectRoute,getmyrecentsession)
-router.get(":/id",ProtectRoute,getsessionbyid)
-router.post(":/id/join",ProtectRoute,joinsession)
-router.post(":/id/end",ProtectRoute,endsession)
+router.get("/:id",ProtectRoute,getsessionbyid)
+router.post("/:id/join",ProtectRoute,joinsession)
+router.post("/:id/end",ProtectRoute,endsession)
 
 export default router

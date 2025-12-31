@@ -10,7 +10,7 @@ const app = express();
 import { ENV } from "./lib/env.js";
 import { connectionDB } from "./lib/DB.js";
 import { inngest, functions } from "./lib/inngest.js";
-import { ProtectRoute } from "./Middleware/ProtectRoute.js";
+
 
 const __dirname = path.resolve();
 
@@ -18,21 +18,12 @@ app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware());
 
-app.get("/health", (req, res) => {
-  res.status(200).json({
-    msg: "hello from server file",
-  });
-});
-app.get("/game", (req, res) => {
-  res.status(200).json({
-    msg: "game is ready",
-  });
-});
+
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.use("/api/chat", chatroute);
-app.use("/api/session", Sessionroute);
+app.use("/api/sessions", Sessionroute);
 
 if ((ENV.NODE_ENV = "production")) {
   app.use(express.static(path.join(__dirname, "../Frontend/dist")));
