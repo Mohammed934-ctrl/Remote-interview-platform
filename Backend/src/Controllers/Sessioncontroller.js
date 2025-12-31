@@ -1,11 +1,14 @@
 import Session from "../Models/Session.schema.js";
-import { ChatClient, StreamClient } from "../lib/Stream.js";
+import { ChatClient, newStreamClient } from "../lib/Stream.js";
 
 export const Createsession = async (req, res) => {
   try {
     const { problem, difficulty } = req.body;
     const userId = req.user._id;
-    const clerkId = req.user.clerkId;
+    const clerkId = req.user?.clerkId;
+    if (!clerkId) {
+      return res.status(401).json({ message: "Clerk ID missing" });
+    }
     if (!problem || !difficulty) {
       return res
         .status(400)
@@ -17,7 +20,7 @@ export const Createsession = async (req, res) => {
 
     let session;
     //create stream video call
-    const call = StreamClient.video.call("default", callId);
+    const call = newStreamClient.video.call("default", callId);
     await call.getOrCreate({
       data: {
         created_by_id: clerkId,
@@ -103,7 +106,7 @@ export const getsessionbyid = async (req, res) => {
 
     if (!session) return res.status(404).json({ message: "Session not foun" });
 
-    res.status(200).json({ session });
+    res.status(200).json({ sessions: session });
   } catch (error) {
     console.error("error in get session by id controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -165,7 +168,7 @@ export const endsession = async (req, res) => {
       return res.status(400).json({ message: "Session is already completed" });
     }
 
-    const call = StreamClient.video.call("default", session.callId);
+    const call = newStreamClient.video.call("default", session.callId);
     await call.delete({ hard: true });
 
     const channel = ChatClient.channel("messaging", session.callId);
