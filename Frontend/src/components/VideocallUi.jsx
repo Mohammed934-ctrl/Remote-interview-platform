@@ -9,7 +9,14 @@ import {
 import { Loader2Icon, MessageSquareIcon, UsersIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Channel } from "stream-chat";
+import {
+  Chat,
+  Channel,
+  Window,
+  MessageList,
+  MessageInput,
+  Thread,
+} from "stream-chat-react";
 const VideocallUi = ({ chatClient, channel }) => {
   const navigate = useNavigate();
 
@@ -65,30 +72,33 @@ const VideocallUi = ({ chatClient, channel }) => {
 
 
   {isChatOpen && (
-            <>
-              <div className="bg-[#1c1e22] p-3 border-b border-[#3a3d44] flex items-center justify-between">
-                <h3 className="font-semibold text-white">Session Chat</h3>
-                <button
-                  onClick={() => setIsChatOpen(false)}
-                  className="text-gray-400 hover:text-white transition-colors"
-                  title="Close chat"
-                >
-                  <XIcon className="size-5" />
-                </button>
-              </div>
-              <div className="flex-1 overflow-hidden stream-chat-dark">
-                <Chat client={chatClient} theme="str-chat__theme-dark">
-                  <Channel channel={channel}>
-                    <Window>
-                      <MessageList />
-                      <MessageInput />
-                    </Window>
-                    <Thread />
-                  </Channel>
-                </Chat>
-              </div>
-            </>
-          )}   
+  <div className="w-90 h-full bg-[#1c1e22] border-l border-[#2f3136] flex flex-col">
+    
+    <div className="p-3 border-b border-[#3a3d44] flex items-center justify-between">
+      <h3 className="font-semibold text-white">Session Chat</h3>
+      <button
+        onClick={() => setIsChatOpen(false)}
+        className="text-gray-400 hover:text-white"
+      >
+        <XIcon className="size-5" />
+      </button>
+    </div>
+
+   
+    <div className="flex-1 overflow-hidden">
+      <Chat client={chatClient} theme="str-chat__theme-dark">
+        <Channel channel={channel}>
+          <Window>
+            <MessageList />
+            <MessageInput />
+          </Window>
+          <Thread />
+        </Channel>
+      </Chat>
+    </div>
+  </div>
+)}
+  
   </div>
 )};
 

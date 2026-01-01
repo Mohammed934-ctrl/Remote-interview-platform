@@ -18,7 +18,7 @@ const ActiveSession = ({ sessions, isLoading, isUserInSession }) => {
         <div className="flex items-center justify-between mb-6">
           {/* TITLE AND ICON */}
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-primary to-secondary rounded-xl">
+            <div className="p-2 bg-linear-to-br from-primary to-secondary rounded-xl">
               <ZapIcon className="size-5" />
             </div>
             <h2 className="text-2xl font-black">Live Sessions</h2>
@@ -33,7 +33,7 @@ const ActiveSession = ({ sessions, isLoading, isUserInSession }) => {
         </div>
 
         {/* SESSIONS LIST */}
-        <div className="space-y-3 max-h-[400px] overflow-y-auto ">
+        <div className="space-y-3 max-h-100 overflow-y-auto ">
           {isLoading ? (
             <div className="flex items-center justify-center py-20">
               <LoaderIcon className="size-10 animate-spin text-primary" />
@@ -47,7 +47,7 @@ const ActiveSession = ({ sessions, isLoading, isUserInSession }) => {
                 <div className="flex items-center justify-between gap-4 p-5">
                   {/* LEFT SIDE */}
                   <div className="flex items-center gap-4 flex-1">
-                    <div className="relative size-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                    <div className="relative size-14 rounded-xl bg-linear-to-br from-primary to-secondary flex items-center justify-center">
                       <Code2Icon className="size-7 text-white" />
                       <div className="absolute -top-1 -right-1 size-4 bg-success rounded-full border-2 border-base-100" />
                     </div>
@@ -111,7 +111,7 @@ const ActiveSession = ({ sessions, isLoading, isUserInSession }) => {
             ))
           ) : (
             <div className="text-center py-16">
-              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-4 bg-linear-to-br from-primary/20 to-secondary/20 rounded-3xl flex items-center justify-center">
                 <SparklesIcon className="w-10 h-10 text-primary/50" />
               </div>
               <p className="text-lg font-semibold opacity-70 mb-1">

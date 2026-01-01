@@ -28,8 +28,8 @@ function useStreamClient(session, loadingsesssion, isHost, isParticipant) {
     let chatClientInstance = null;
 
     const initcall = async () => {
-      if (!session?.callId) return;
-      if (!isHost && !isParticipant) return;
+      if (!session || loadingsesssion)   return ;
+        if (!isHost && !isParticipant) return;
       if (session.status === "Completed") return;
 
       try {

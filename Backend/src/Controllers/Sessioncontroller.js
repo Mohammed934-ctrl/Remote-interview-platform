@@ -29,7 +29,9 @@ export const Createsession = async (req, res) => {
           difficulty,
         },
       },
+
     });
+    
 
     try {
       //create stream chat
@@ -64,8 +66,8 @@ export const Createsession = async (req, res) => {
 export const getactivesession = async (_, res) => {
   try {
     const session = await Session.find({ status: "Active" })
-      .populate("host", "name email profileImage ClerkId")
-      .populate("participant", "name email profileImage ClerkId")
+      .populate("host","name email profileImage clerkId")
+      .populate("participant","name email profileImage clerkId")
       .sort({ createdAt: -1 })
       .limit(20);
 
@@ -101,12 +103,12 @@ export const getsessionbyid = async (req, res) => {
   try {
     const { id } = req.params;
     const session = await Session.findById(id)
-      .populate("host", " name email profileImage ClerkId")
-      .populate("participant", "name email profileImage ClerkId");
+      .populate("host", "name email profileImage clerkId")
+      .populate("participant", "name email profileImage clerkId");
 
-    if (!session) return res.status(404).json({ message: "Session not foun" });
+    if (!session) return res.status(404).json({ message: "Session not found" });
 
-    res.status(200).json({ sessions: session });
+    res.status(200).json({ session });
   } catch (error) {
     console.error("error in get session by id controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
