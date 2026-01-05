@@ -11,11 +11,21 @@ https://remote-interview-platform-tuj5.onrender.com
 
 🖼️ Screenshots
 
+<<<<<<< HEAD
 ### Dashboard
 ![Dashboard](Frontend/src/assets/dashboard.png)
 
 Interview Session
 ![Session](Frontend/src/assets/session.png)
+=======
+Screenshots help reviewers understand the app instantly.
+
+Dashboard
+
+Interview Session
+
+Create Session
+
 
 
 
@@ -107,6 +117,10 @@ CLERK_SECRET_KEY=your_secret_key
 CLIENT_URL=http://localhost:5173
 
 
+<<<<<<< HEAD
+=======
+⚠️ Never commit .env files to GitHub.
+>>>>>>> 539d978 (fix: update vite config and README)
 
 🧪 Local Setup
 1️⃣ Clone the repository
@@ -162,4 +176,8 @@ Clerk Documentation
 
 Stream Video SDK
 
+<<<<<<< HEAD
 Render Deployment Docs
+=======
+Render Deployment Docs
+>>>>>>> 539d978 (fix: update vite config and README)
