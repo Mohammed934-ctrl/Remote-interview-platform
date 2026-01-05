@@ -1,8 +1,6 @@
-import { useState } from "react";
-
 import "./App.css";
 import { Navigate, Route, Routes } from "react-router";
-import Home from "./pages/Home";
+import Home from "./pages/Home.jsx";
 
 import { useUser } from "@clerk/clerk-react";
 import { Toaster } from "react-hot-toast";
@@ -36,5 +34,5 @@ function App() {
     </>
   );
 }
-
+ 
 export default App;

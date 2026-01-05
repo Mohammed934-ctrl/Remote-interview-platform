@@ -46,7 +46,7 @@ export async function executecode(language, sourcecode) {
     if (!response.ok) {
       return {
         success: false,
-        eror: `http error status:${response.status}`,
+        error: `http error status:${response.status}`,
       };
     }
 
