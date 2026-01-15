@@ -3,7 +3,7 @@ import { connectionDB } from "./DB.js";
 import User from "../Models/User.schema.js";
 import { Createandupdatestreamuser, deletestreamuser } from "./Stream.js";
 
-export const inngest = new Inngest({ id: "Remote-interview" });
+export const inngest = new Inngest({ id: "remote-interview"});
 
 const syncuser = inngest.createFunction(
   
