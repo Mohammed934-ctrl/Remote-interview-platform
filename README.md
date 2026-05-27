@@ -133,24 +133,22 @@ git clone https://github.com/your-username/remote-interview-platform.git
 cd remote-interview-platform
 ```
 
-### 2️⃣ Initialize the Backend Server
+### 2️⃣ Install dependencies
+**Backend**
 ```bash
 cd Backend
 npm install
-# Run the development server
 npm run dev
 ```
 
-### 3️⃣ Initialize the Frontend App
+**Frontend**
 ```bash
-# In a new terminal window
 cd Frontend
 npm install
-# Run the Vite client
 npm run dev
 ```
 
-### 4️⃣ Local Inngest Dev Server (Optional for webhook debugging)
+### 3️⃣ Local Inngest Dev Server (Optional for webhook debugging)
 To trigger and inspect background webhook events locally:
 ```bash
 npx inngest-cli@latest dev -u http://localhost:3000/api/inngest
